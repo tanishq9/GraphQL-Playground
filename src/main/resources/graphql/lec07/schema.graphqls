@@ -1,0 +1,61 @@
+# Extended Scalar Types
+
+scalar Long
+scalar Byte
+scalar Short
+scalar BigInteger
+scalar BigDecimal
+scalar Date
+scalar LocalTime
+scalar DateTime
+scalar Object # to return anything, client doesn't know
+
+type Query {
+    getAll: AllTypes
+    products: [Product]!
+}
+
+type AllTypes {
+    # default scalar types
+    id: ID
+    height: Int
+    temperature: Float
+    city: String
+    isValid: Boolean
+    # extended scalar types
+    distance: Long
+    ageInYears: Byte
+    ageInMonths: Short
+    bigInteger: BigInteger
+    bigDecimal: BigDecimal
+    date: Date
+    time: LocalTime
+    dateTime: DateTime
+    car: Car
+}
+
+enum Car {
+    BMW
+    MERCEDES
+}
+
+type Product {
+    name: String
+    attributes: Object
+}
+
+# Sample GraphQL query for above schema
+# {
+#  getAll {
+#    id
+#    bigInteger
+#    bigDecimal
+#    date
+#    time
+#    dateTime
+#  }
+#  products {
+#    name
+#    attributes
+#  }
+#}

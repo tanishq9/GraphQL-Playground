@@ -1,0 +1,61 @@
+# Interface
+
+type Query {
+    products: [Product]
+}
+
+interface Product {
+    id: ID!
+    description: String
+    price: Int
+}
+
+type Fruit implements Product {
+    # common fields
+    id: ID!
+    description: String
+    price: Int
+    # additional field
+    expiryDate: String
+}
+
+type Electronics implements Product {
+    # common fields
+    id: ID!
+    description: String
+    price: Int
+    # additional field
+    brand: Brand
+}
+
+type Book implements Product {
+    # common fields
+    id: ID!
+    description: String
+    price: Int
+    # additional field
+    author: String
+}
+
+enum Brand {
+    APPLE,
+    SAMSUNG
+}
+
+# {
+#  products {
+#    id
+#    description
+#    price
+#    __typename # To get the type of implementation
+#    ... on FruitDto {
+#      expiryDate
+#    }
+#    ... on Book {
+#      author
+#    }
+#    ... on Electronics {
+#      brand
+#    }
+#  }
+#}

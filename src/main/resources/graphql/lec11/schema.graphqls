@@ -1,0 +1,69 @@
+# Using Query and Mutation for a CRUD app
+
+# For GET Mapping
+type Query {
+    customers: [Customer]!
+    customerById(id: ID!): Customer
+    createCustomer(customer: CustomerInput): Customer
+}
+
+# Using Mutation over Query is just for convention
+
+# For POST/PUT Mapping
+type Mutation {
+    updateCustomer(id: ID!, customer: CustomerInput): Customer # response is updated customer
+    deleteCustomer(id: ID!): DeleteResponse # return the deleted object
+}
+
+type Customer {
+    id: ID!
+    name: String
+    age: Int
+    city: String
+}
+
+input CustomerInput {
+    name: String
+    age: Int
+    city: String
+}
+
+type DeleteResponse {
+    id: ID!
+    status: Status
+}
+
+enum Status {
+    SUCCESS
+    FAILURE
+}
+
+# query get {
+#  customers {
+#    id
+#    name
+#    city
+#    age
+#  }
+#}
+#
+#mutation create {
+#  createCustomer(customer: {name: "a", age: 1, city: "a"}) {
+#    id
+#    name
+#    city
+#    age
+#  }
+#}
+#
+#mutation update {
+#  updateCustomer(
+#    id: 1
+#    customer: {name: "sam_edited", age: 10, city: "la_edited"}
+#  ) {
+#    id
+#    name
+#    city
+#    age
+#  }
+#}

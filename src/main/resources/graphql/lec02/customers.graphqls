@@ -1,0 +1,27 @@
+# Custom Object
+
+type Query {
+    # use this to fetch all customers
+    customers: [Customer]!
+
+    # use this to fetch specific customer by id
+    customerById(id: ID!): Customer
+
+    # filter customers by name
+    customerByName(name: String!): [Customer]
+
+    # filter customers by age range
+    customerByAgeRange(filter: AgeRangeFilter): [Customer]!
+}
+
+input AgeRangeFilter {
+    min: Int!,
+    max: Int!
+}
+
+type Customer {
+    id: ID,
+    name: String,
+    age: Int,
+    city: String
+}

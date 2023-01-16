@@ -1,0 +1,5 @@
+type Query {
+    # endpoint is sayHello and output is String
+    sayHello: String
+    sayHelloTo(name: String!): String # equivalent to http://localhost:8080/saveHello/{name}
+}

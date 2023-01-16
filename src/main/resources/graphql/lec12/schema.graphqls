@@ -1,0 +1,54 @@
+# If we are using HTTP as the underlying transport for our GraphQL, so client might want to send some headers in the request.
+# How to access those headers and take some decision?
+
+# For GET Mapping
+type Query {
+    customers: [Customer]!
+    customerById(id: ID!): Customer
+    createCustomer(customer: CustomerInput): Customer
+}
+
+# Using Mutation over Query is just for convention
+
+# For POST/PUT Mapping
+type Mutation {
+    updateCustomer(id: ID!, customer: CustomerInput): Customer # response is updated customer
+    deleteCustomer(id: ID!): DeleteResponse # return the deleted object
+}
+
+type Customer {
+    id: ID!
+    name: String
+    age: Int
+    city: String
+}
+
+input CustomerInput {
+    name: String
+    age: Int
+    city: String
+}
+
+type DeleteResponse {
+    id: ID!
+    status: Status
+}
+
+enum Status {
+    SUCCESS
+    FAILURE
+}
+
+# query get {
+#  customers {
+#    id
+#    name
+#    city
+#    age
+#  }
+# }
+#
+# Request Headers: (If underlying protocol is HTTP)
+# {
+#  "caller-id": 1
+# }
